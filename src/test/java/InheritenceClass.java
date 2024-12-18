@@ -5,6 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
 import java.io.IOException;
+import java.lang.NullPointerException;
 
 public class InheritenceClass {
     Config config;
@@ -13,6 +14,8 @@ public class InheritenceClass {
     public void setup() throws IOException {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        config=new Config();
+        driver.manage().window().maximize();
         driver.get(config.returnValue("url"));
     }
     @AfterTest

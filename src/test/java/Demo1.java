@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 public class Demo1 extends InheritenceClass{
-Config config;
 
     @Test(priority = 1,description = "Verify login page working as expected")
     public  void login() throws InterruptedException, IOException {
