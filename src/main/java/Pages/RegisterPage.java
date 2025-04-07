@@ -1,9 +1,12 @@
 package Pages;
 
+import Utilities.Config;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.io.IOException;
 
 public class RegisterPage {
 
@@ -20,13 +23,14 @@ public class RegisterPage {
     WebElement RegisterNow;
     @FindBy(xpath = "//div[@id='notistack-snackbar']")
     WebElement Validate;
+    Config C;
 
     public RegisterPage(WebDriver driver){
         this.driver= driver;
         PageFactory.initElements(driver,this);
     }
 
-    public void DoRegister() {
+    public void DoRegister() throws IOException {
         Register.click();
         Usernamefield();
         Passwordfield();
@@ -34,20 +38,25 @@ public class RegisterPage {
         RegisterNow.click();
     }
 
-    public void InvalidScenario(){
+    public void InvalidScenario() throws IOException {
         Register.click();
         Usernamefield();
+        Passwordfield();
+        ConfirmPasswordfield();
         RegisterNow.click();
     }
 
-    public void Usernamefield(){
-        Username.sendKeys("Anura");
+    public void Usernamefield() throws IOException {
+        C=new Config();
+        Username.sendKeys(C.getproperties("Username"));
     }
-    public void Passwordfield(){
-        Password.sendKeys("abcd");
+    public void Passwordfield() throws IOException {
+        C=new Config();
+        Password.sendKeys(C.getproperties("Password"));
     }
-    public void ConfirmPasswordfield(){
-        ConfirmPassword.sendKeys("abcd");
+    public void ConfirmPasswordfield() throws IOException {
+        C=new Config();
+        ConfirmPassword.sendKeys(C.getproperties("ConfRegPassword"));
     }
     public String ValidationMessage(){
         return Validate.getText();

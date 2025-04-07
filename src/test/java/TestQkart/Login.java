@@ -2,37 +2,44 @@ package TestQkart;
 
 import Pages.LoginPage;
 import Pages.RegisterPage;
+import Utilities.Config;
 import org.apache.commons.lang3.Validate;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 public class Login extends BaseClass {
+    Config C;
     @Test
-    public void Test1() throws InterruptedException {
+    public void Test1() throws InterruptedException, IOException {
         LoginPage LP = new LoginPage(driver);
         LP.BlankPassword();
-
-        Assert.assertEquals(LP.ValidationMessage(), "Password is a required field");
+        C=new Config();
+        Assert.assertEquals(LP.ValidationMessage(), C.getproperties("ValidationMessage01"));
     }
     @Test
-    public void Test2(){
+    public void Test2() throws IOException {
         LoginPage LP=new LoginPage(driver);
         LP.InvalidUsername();
-        Assert.assertEquals(LP.ValidationMessage(),"Username does not exist");
+        C=new Config();
+        Assert.assertEquals(LP.ValidationMessage(), C.getproperties("ValidationMessage02"));
 
     }
     @Test
-    public void Test3(){
+    public void Test3() throws IOException {
         LoginPage LP=new LoginPage(driver);
         LP.InvalidPassword();
-        Assert.assertEquals(LP.ValidationMessage(),"Password is incorrect");
+        C=new Config();
+        Assert.assertEquals(LP.ValidationMessage(), C.getproperties("ValidationMessage03"));
 
     }
     @Test
-    public void Test4(){
+    public void Test4() throws IOException {
         LoginPage LP=new LoginPage(driver);
         LP.DoLogin();
-        Assert.assertEquals(LP.ValidationMessage(),"Logged in successfully");
+        C=new Config();
+        Assert.assertEquals(LP.ValidationMessage(), C.getproperties("ValidationMessage04"));
 
     }
 }
